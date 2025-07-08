@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Jailbreak - Tự do hóa iPhone/iPad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #ffd700;
+    }
+
+    main {
+        margin-top: 80px;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 4rem 0;
+        color: white;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .cta-button {
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .section {
+        padding: 4rem 0;
+        background: white;
+        margin: 2rem 0;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .card {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: transform 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card h3 {
+        color: #4a5568;
+        margin-bottom: 1rem;
+    }
+
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .tool-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tool-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s;
+        opacity: 0;
+    }
+
+    .tool-card:hover::before {
+        animation: shimmer 0.6s ease-in-out;
+    }
+
+    .tool-card:hover {
+        background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .tool-card h4 {
+        color: #495057;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .tool-card p {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .tool-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .tool-status {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-weight: 500;
+    }
+
+    .status-active {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-beta {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-legacy {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .download-btn {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .download-btn:active {
+        transform: translateY(0);
+    }
+
+    .floating-action {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        transition: all 0.3s;
+        z-index: 999;
+    }
+
+    .floating-action:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .device-checker {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .device-checker h3 {
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    .device-checker p {
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 1.5rem;
+    }
+
+    .check-device-btn {
+        background: white;
+        color: #4facfe;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .check-device-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+    }
+
+    .news-section {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 4rem 0;
+        margin: 2rem 0;
+        border-radius: 20px;
+    }
+
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .news-card {
+        background: rgba(255,255,255,0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: all 0.3s;
+    }
+
+    .news-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,0.15);
+    }
+
+    .news-date {
+        color: #3498db;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .faq-section {
+        background: #f8f9fa;
+        padding: 4rem 0;
+        margin: 2rem 0;
+        border-radius: 20px;
+    }
+
+    .faq-item {
+        background: white;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .faq-question {
+        background: #667eea;
+        color: white;
+        padding: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+        background: #5a67d8;
+    }
+
+    .faq-answer {
+        padding: 1rem;
+        display: none;
+        background: white;
+        border-top: 1px solid #eee;
+    }
+
+    .faq-answer.active {
+        display: block;
+    }
+
+    .compatibility-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .compatibility-table th,
+    .compatibility-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .compatibility-table th {
+        background: #667eea;
+        color: white;
+        font-weight: 600;
+    }
+
+    .compatibility-table tr:hover {
+        background: #f8f9fa;
+    }
+
+    .status-supported {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .status-partial {
+        color: #ffc107;
+        font-weight: bold;
+    }
+
+    .status-unsupported {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .warning {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .warning h3 {
+        color: #856404;
+        margin-bottom: 1rem;
+    }
+
+    .warning p {
+        color: #856404;
+    }
+
+    footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    a.download-btn {
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+</style>
+
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🔓 iOS Jailbreak</div>
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#tools">Công cụ</a></li>
+                <li><a href="#compatibility">Tương thích</a></li>
+                <li><a href="#guides">Hướng dẫn</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main>
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Tự do hóa iPhone/iPad của bạn</h1>
+            <p>Khám phá toàn bộ tiềm năng của thiết bị iOS với jailbreak</p>
+            <a href="#tools" class="cta-button">Bắt đầu ngay</a>
+        </div>
+    </section>
+
+<section id="tools" class="section">
+  <div class="container">
+    <h2>Công cụ Jailbreak phổ biến</h2>
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/2jT4sgwy/IMG-5986.png" alt="checkra1n" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Checkra1n
+        </h4>
+        <p>Jailbreak semi-tethered cho iOS 12.3 - 14.8.1 trên các thiết bị A5-A11. Sử dụng lỗ hổng checkm8 không thể patch được.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://checkra.in/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/vTPf56Bf/IMG-5987.jpg" alt="unc0ver" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Unc0ver
+        </h4>
+        <p>Jailbreak semi-untethered cho iOS 11.0 - 14.8 trên hầu hết thiết bị. Hỗ trợ rộng rãi với nhiều tính năng advanced.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://unc0ver.dev/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/LX3z6WFy/IMG-5988.jpg" alt="Taurine" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Taurine
+        </h4>
+        <p>Jailbreak semi-untethered cho iOS 14.0 - 14.3 với libhooker. Tối ưu hóa hiệu năng và ổn định cao.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://taurine.app/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/RVkqyTjq/IMG-5989.png" alt="Odyssey" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Odyssey
+        </h4>
+        <p>Jailbreak semi-untethered cho iOS 13.0 - 13.7 với Sileo package manager. Giao diện hiện đại và mượt mà.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://theodyssey.dev/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/GmTGst1T/IMG-5990.jpg" alt="Electra" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Electra
+        </h4>
+        <p>Jailbreak semi-untethered cho iOS 11.0 - 11.4.1. Một trong những jailbreak ổn định nhất cho iOS 11.</p>
+        <div class="tool-info">
+          <span class="tool-status status-legacy">Legacy</span>
+          <a href="https://coolstar.org/electra/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/fLNcsNpt/IMG-5992.jpg" alt="Chimera" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Chimera
+        </h4>
+        <p>Jailbreak semi-untethered cho iOS 12.0 - 12.5.7 với Sileo. Hỗ trợ A7 - A12 với nhiều tính năng độc đáo.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://chimera.coolstar.org/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/vHN5B9Cd/IMG-5984.jpg" alt="Palera1n" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Palera1n
+        </h4>
+        <p>Jailbreak mới nhất cho iOS 15.0 - 16.7 trên thiết bị A8-A11. Hỗ trợ rootless jailbreak an toàn.</p>
+        <div class="tool-info">
+          <span class="tool-status status-active">Hoạt động</span>
+          <a href="https://github.com/palera1n/palera1n" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/8P5hNwKH/IMG-5985.jpg" alt="Dopamine" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Dopamine
+        </h4>
+        <p>Jailbreak rootless cho iOS 15.0 - 16.6.1 trên A12-A15. Không cần modify system partition.</p>
+        <div class="tool-info">
+          <span class="tool-status status-beta">Beta</span>
+          <a href="https://ellekit.space/dopamine/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h4>
+          <img src="https://i.postimg.cc/SsSVzPbv/IMG-5993.webp" alt="XinaA15" style="width: 24px; vertical-align: middle; margin-right: 8px;">
+          Xinam1ne
+        </h4>
+        <p>Jailbreak bán untethered, rootless, hoạt động trên các thiết bị iPhone/iPad chip A12 trở lên (XR, XS, 11, 12, 13, SE 2/3) và iPad M1, chạy iOS 15.0 đến 16.5.1 (và một số bản beta).</p>
+        <div class="tool-info">
+          <span class="tool-status status-beta">Beta</span>
+          <a href="https://xina.cypwn.xyz/" target="_blank" class="download-btn">⬇️ Tải về</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <section id="compatibility" class="section">
+        <div class="container">
+            <h2>Bảng tương thích</h2>
+            <table class="compatibility-table">
+                <thead>
+                    <tr>
+                        <th>Phiên bản iOS</th>
+                        <th>Công cụ</th>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>iOS 16.0 - 16.7</td>
+                        <td>palera1n</td>
+                        <td>A8 - A11</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 15.0 - 16.6.1</td>
+                        <td>Dopamine</td>
+                        <td>A12 - A15</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 15.0 - 16.5.1</td>
+                        <td>Xinam1ne</td>
+                        <td>A12–A15 và M1</td>
+                        <td class="status-partial">Beta</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 15.0 - 15.7</td>
+                        <td>checkra1n</td>
+                        <td>A5 - A11</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 14.0 - 14.8</td>
+                        <td>unc0ver</td>
+                        <td>A8 - A13</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 14.0 - 14.3</td>
+                        <td>Taurine</td>
+                        <td>A8 - A13</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 13.0 - 13.7</td>
+                        <td>Odyssey</td>
+                        <td>A7 - A13</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 12.0 - 12.5.7</td>
+                        <td>Chimera</td>
+                        <td>A7 - A12</td>
+                        <td class="status-supported">Hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 17.0 - 17.6</td>
+                        <td>Chưa có</td>
+                        <td>Tất cả</td>
+                        <td class="status-unsupported">Chưa hỗ trợ</td>
+                    </tr>
+                    <tr>
+                        <td>iOS 18.0+</td>
+                        <td>Chưa có</td>
+                        <td>Tất cả</td>
+                        <td class="status-unsupported">Chưa hỗ trợ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>🏪 Package Managers & Repos</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📱 Cydia</h3>
+                    <p>Package manager truyền thống với kho repo phong phú. Hỗ trợ hầu hết các jailbreak từ iOS 2.0</p>
+                    <a href="https://cydia.saurik.com/" target="_blank" class="cta-button" style="margin-top: 1rem;">Tìm hiểu thêm</a>
+                </div>
+                <div class="card">
+                    <h3>🛍️ Sileo</h3>
+                    <p>Package manager hiện đại với giao diện đẹp mắt. Tích hợp với Chimera, Odyssey và Taurine</p>
+                    <a href="https://getsileo.app/" target="_blank" class="cta-button" style="margin-top: 1rem;">Tải về</a>
+                </div>
+                <div class="card">
+                    <h3>🌟 Zebra</h3>
+                    <p>Package manager mã nguồn mở với tốc độ nhanh và nhiều tính năng advanced</p>
+                    <a href="https://getzbra.com/" target="_blank" class="cta-button" style="margin-top: 1rem;">Tải về</a>
+                </div>
+                <div class="card">
+                    <h3>📦 Installer</h3>
+                    <p>Alternative package manager với giao diện thân thiện và dễ sử dụng</p>
+                    <a href="https://apptapp.me/installer/" target="_blank" class="cta-button" style="margin-top: 1rem;">Tải về</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>🔧 Tweaks phổ biến</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>🎨 Snowboard</h4>
+                    <p>Theme engine mạnh mẽ cho việc thay đổi icons và giao diện</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">Miễn phí</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">BigBoss Repo</span>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>🔋 SmartBattery 12</h4>
+                    <p>Hiển thị thông tin chi tiết về pin và tối ưu hóa hiệu năng</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">$1.99</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Packix Repo</span>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>📱 Prysm</h4>
+                    <p>Redesign Control Center với giao diện hiện đại và nhiều tùy chọn</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">$4.99</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Packix Repo</span>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>🌙 Eclipse Dark Mode</h4>
+                    <p>Áp dụng dark mode cho toàn bộ hệ thống iOS</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">$0.99</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">Packix Repo</span>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>📸 Watusi for WhatsApp</h4>
+                    <p>Thêm nhiều tính năng mới cho WhatsApp như online stealth, backup</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">Miễn phí</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">BigBoss Repo</span>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <h4>🎵 Spotify++</h4>
+                    <p>Mở khóa premium features cho Spotify như skip unlimited, no ads</p>
+                    <div class="tool-info">
+                        <span class="tool-status status-active">Miễn phí</span>
+                        <span style="font-size: 0.8rem; color: #6c757d;">AppCake Repo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            <div class="grid">
+                <div class="card">
+                    <h3>🎨 Tùy chỉnh giao diện</h3>
+                    <p>Thay đổi themes, icons, fonts và nhiều yếu tố giao diện khác theo ý muốn</p>
+                </div>
+                <div class="card">
+                    <h3>📱 Cài đặt ứng dụng bên ngoài</h3>
+                    <p>Cài đặt các ứng dụng không có trên App Store từ Cydia, Sileo</p>
+                </div>
+                <div class="card">
+                    <h3>🔧 Truy cập hệ thống</h3>
+                    <p>Có quyền truy cập root để chỉnh sửa các tập tin hệ thống</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Tối ưu hiệu năng</h3>
+                    <p>Cài đặt tweaks để tăng tốc độ và tối ưu hóa pin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="warning">
+            <h3>⚠️ Cảnh báo quan trọng</h3>
+            <p>Jailbreak có thể làm mất bảo hành, gây bất ổn hệ thống, và có rủi ro bảo mật. Hãy tìm hiểu kỹ và backup dữ liệu trước khi thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ thiệt hại nào có thể xảy ra.</p>
+        </div>
+    </div>
+
+    <section id="guides" class="section">
+        <div class="container">
+            <h2>Hướng dẫn cơ bản</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Kiểm tra tương thích</h3>
+                    <p>Xác định phiên bản iOS và model thiết bị của bạn để chọn công cụ phù hợp</p>
+                </div>
+                <div class="card">
+                    <h3>2. Backup dữ liệu</h3>
+                    <p>Tạo bản backup đầy đủ qua iTunes/Finder hoặc iCloud trước khi bắt đầu</p>
+                </div>
+                <div class="card">
+                    <h3>3. Tải công cụ</h3>
+                    <p>Download công cụ jailbreak từ website chính thức của nhà phát triển</p>
+                </div>
+                <div class="card">
+                    <h3>4. Thực hiện jailbreak</h3>
+                    <p>Làm theo hướng dẫn chi tiết của từng công cụ để jailbreak thiết bị</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 iOS Jailbreak Guide. Chỉ mang tính chất tham khảo và giáo dục.</p>
+        <p>Luôn tuân thủ pháp luật và điều khoản sử dụng của Apple.</p>
+    </div>
+</footer>
+
+<script>
+   // Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetID = this.getAttribute('href');
+        const target = document.querySelector(targetID);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+    // Header background change on scroll
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.color = '#333';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.1)';
+            header.style.color = 'white';
+        }
+    });
+
+    // Add animation to cards on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all cards
+    document.querySelectorAll('.card, .tool-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+</script>
+
+</body>
+</html>
